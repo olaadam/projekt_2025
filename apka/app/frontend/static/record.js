@@ -35,8 +35,9 @@ see_events.addEventListener("click", () => {
 });
 
 see_recordings.addEventListener("click", () => {
-    window.location.href = "/my_recordings"; // Przenosi użytkownika na podstronę /events
+    window.location.href = "/my_recordings"; // Przenosi użytkownika na podstronę /recordings
 });
+
 
 // Funkcja do pobrania okna
 async function selectWindow() {

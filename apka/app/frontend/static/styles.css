@@ -115,6 +115,15 @@ button:disabled {
     cursor: pointer;
     transition: background-color 0.3s, transform 0.3s;
 }
+#notes-btn  {
+    background-color: rgb(226, 178, 212);
+    margin-bottom: 10px;
+    color: black;
+    padding: 10px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
 
 #events-btn:hover {
     background-color: #ea72c8;
@@ -122,6 +131,15 @@ button:disabled {
 }
 
 #events-btn:active {
+    background-color: #9e4f8a; 
+}
+
+#notes-btn:hover {
+    background-color: #ea72c8;
+    transform: scale(1.2); 
+}
+
+#notes-btn:active {
     background-color: #9e4f8a; 
 }
 
@@ -179,3 +197,4 @@ input[type="text"] {
     justify-content: center; /* Wyrównanie tekstu w poziomie */
     font-weight: bold; /* Pogrubienie tekstu */
 }
+

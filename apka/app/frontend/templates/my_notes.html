@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moje Notatki</title>
+    <link rel="icon" type="image/x-icon" href="static/logoo.png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles2.css') }}">
+</head>
+<body>
+    <!-- Przyciski i linki w prawym górnym rogu -->
+    <div class="top-nav">
+        <a href="/" class="back-to-home">Powrót do strony głównej</a>
+    </div>
+
+    <div class="container">
+        <h1>Moje Notatki</h1>
+        <ul class="notes-list">
+            {% for note in notes %}
+            <li>
+                <a href="{{ url_for('main.get_note', filename=note) }}" download>{{ note }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</body>
+</html>

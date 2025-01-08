@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>NoteWriter</title>
-        <link rel="stylesheet" href="static/styles.css">
-        <link rel="icon" type="image/x-icon" href="static/logoo.png">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoteWriter</title>
+    <link rel="stylesheet" href="static/styles.css">
+    <link rel="icon" type="image/x-icon" href="static/logoo.png">
+</head>
 <body>
     <div id="timer" class="timer" style="display: none;">Nagrywanie</div>
     <div class="container">
@@ -14,6 +14,9 @@
         <button id="events-btn">Zobacz swoje wydarzenia!</button>
         <button id="record-btn">Wybierz okno do nagrywania</button>
         <button id="recordings-btn">Zobacz swoje nagrania</button>
+        <a href="/my_notes">
+            <button id="notes-btn">Zobacz swoje notatki</button>
+        </a>        
         <div id="window-selection" class="selection" style="display: none;">
             <h2>Wybierz okno:</h2>
             <select id="window-list" style="display: none;"></select>
@@ -31,5 +34,6 @@
     </div>
 
     <script src="static/record.js"></script>
+    <script src="static/notes.js"></script>
 </body>
 </html>

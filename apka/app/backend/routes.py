@@ -4,6 +4,7 @@ import pygetwindow as gw
 from .recording import record_window, start_recording_thread, stop_recording, save_recording, setup_upload_folder
 import os
 from werkzeug.utils import secure_filename
+from .note import process_audio_and_save_transcription
 
 main = Blueprint('main', __name__, template_folder="../frontend/templates", static_folder="../frontend/static")
 
@@ -104,11 +105,57 @@ def get_recording(filename):
     except FileNotFoundError:
         return "File not found", 404
 
+@main.route('/my_notes')
+def show_notes():
+    docx_folder = os.path.join(os.getcwd(), 'notes')
+    if not os.path.exists(docx_folder):
+        return render_template('my_notes.html', notes=[])
+
+    notes = [f for f in os.listdir(docx_folder) if f.endswith('.docx')]
+    return render_template('my_notes.html', notes=notes)
 
 @main.route('/debug/recordings')
 def debug_recordings():
     return str(os.listdir(UPLOAD_FOLDER))
 
+
+@main.route('/generate_notes', methods=['POST'])
+def generate_notes():
+    """Generuj transkrypcję notatek na podstawie istniejącego pliku .wav."""
+    try:
+        title = request.form.get('title')
+        if not title:
+            return jsonify({'error': 'Brak nazwy pliku! Podaj tytuł pliku WAV.'}), 400
+
+        # Ścieżka do pliku WAV w katalogu 'recordings'
+        wav_path = os.path.join(UPLOAD_FOLDER, f"{title}.wav")
+        if not os.path.exists(wav_path):
+            return jsonify({'error': f"Plik {title}.wav nie istnieje w katalogu recordings!"}), 404
+
+        # Ścieżka do folderu z notatkami
+        notes_folder = os.path.join(os.getcwd(), 'notes')
+        if not os.path.exists(notes_folder):
+            os.makedirs(notes_folder)
+
+        # Generowanie transkrypcji
+        process_audio_and_save_transcription(wav_path, notes_folder)
+
+        return jsonify({'message': f"Transkrypcja wygenerowana dla {title}.wav!", 'path': os.path.join(notes_folder, f"{title}.docx")})
+    except ValueError as e:
+        return jsonify({'error': str(e)}), 400
+    except RuntimeError as e:
+        return jsonify({'error': str(e)}), 500
+    except Exception as e:
+        return jsonify({'error': 'Nieoczekiwany błąd.', 'details': str(e)}), 500
+    
+
+@main.route('/notes/<filename>')
+def get_note(filename):
+    docx_folder = os.path.join(os.getcwd(), 'notes')
+    try:
+        return send_from_directory(docx_folder, filename)
+    except FileNotFoundError:
+        return "File not found", 404
 
 if __name__ == "__main__":
     main.run(debug=True)

@@ -70,6 +70,26 @@ body {
     text-decoration: underline;
 }
 
+.notes-list {
+    list-style: none;
+    padding: 0;
+}
+
+.notes-list li {
+    margin: 10px 0;
+}
+
+.notes-list a {
+    text-decoration: none;
+    font-style:italic;
+    text-decoration-line: underline;
+    color: #ffffff;
+}
+
+.notes-list a:hover {
+    text-decoration: underline;
+}
+
 .fullscreen-modal {
     position: fixed;
     top: 0;
