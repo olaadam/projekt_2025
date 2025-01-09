@@ -94,7 +94,7 @@ def show_recordings():
     setup_upload_folder()
     # Pobierz listę plików z folderu recordings
     recordings = os.listdir(UPLOAD_FOLDER)
-    recordings = [f for f in recordings if f.endswith(('.mp4', '.webm', '.mov', '.avi'))]  # Filtruj tylko pliki wideo
+    recordings = [f for f in recordings if f.endswith(('.mp4'))]  
     return render_template('my_recordings.html', recordings=recordings)
 
 
