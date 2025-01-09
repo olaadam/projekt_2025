@@ -107,10 +107,12 @@ def get_recording(filename):
 
 @main.route('/my_notes')
 def show_notes():
-    docx_folder = os.path.join(os.getcwd(), 'notes')
+    # Ścieżka do katalogu z notatkami
+    docx_folder = os.path.join(os.getcwd(), 'recordings', 'notes')  # Upewnij się, że folder istnieje w 'recordings/notes'
     if not os.path.exists(docx_folder):
         return render_template('my_notes.html', notes=[])
 
+    # Pobierz pliki `.docx` z folderu
     notes = [f for f in os.listdir(docx_folder) if f.endswith('.docx')]
     return render_template('my_notes.html', notes=notes)
 
@@ -151,9 +153,10 @@ def generate_notes():
 
 @main.route('/notes/<filename>')
 def get_note(filename):
-    docx_folder = os.path.join(os.getcwd(), 'notes')
+    # Ścieżka do katalogu z notatkami
+    docx_folder = os.path.join(os.getcwd(), 'recordings', 'notes')
     try:
-        return send_from_directory(docx_folder, filename)
+        return send_from_directory(docx_folder, filename, as_attachment=True)  # Pobierz plik jako załącznik
     except FileNotFoundError:
         return "File not found", 404
 
