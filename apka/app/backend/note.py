@@ -5,7 +5,7 @@ import torchaudio
 from pydub import AudioSegment
 
 # Inicjalizacja modelu Whisper
-model = load_model("base")
+model = load_model("base") #ew "small"
 
 # Funkcja do zapisywania transkrypcji do pliku .docx
 def save_transcription_to_docx(transcription, filename):
@@ -46,6 +46,12 @@ def process_audio_and_save_transcription(audio_folder, docx_folder):
     for filename in os.listdir(audio_folder):
         if filename.endswith(".mp3") or filename.endswith(".wav"):  # Obsługuje pliki audio
             audio_file_path = os.path.join(audio_folder, filename)
+
+            # Sprawdzanie, czy wynikowy plik już istnieje
+            docx_filename = os.path.join(docx_folder, f"{os.path.splitext(filename)[0]}.docx")
+            if os.path.exists(docx_filename):
+                print(f"Pominięto {filename}, transkrypcja już istnieje.")
+                continue  # Pomijamy przetwarzanie, jeśli plik istnieje
 
             try:
                 transcription = transcribe_audio(audio_file_path)
