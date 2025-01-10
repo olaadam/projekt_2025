@@ -69,7 +69,7 @@ def process_audio_and_save_transcription(audio_folder, docx_folder):
 
 if __name__ == "__main__":
     # Ścieżki do folderów
-    audio_folder = r"recordings" 
+    audio_folder = "recordings" 
     docx_folder = os.path.join(os.getcwd(), 'recordings', 'notes')
     if not os.path.exists(docx_folder):
         os.makedirs(docx_folder)

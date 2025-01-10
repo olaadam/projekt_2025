@@ -19,3 +19,5 @@ pyautogui
 opencv-python
 ffmpeg-python
 moviepy
+python-docx
+whisper
