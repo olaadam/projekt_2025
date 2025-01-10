@@ -18,7 +18,7 @@ def index():
 def events():
     try:
         events = get_calendar_events()
-        return jsonify(events)
+        return render_template('events.html', events=events)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
