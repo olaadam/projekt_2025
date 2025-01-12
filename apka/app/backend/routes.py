@@ -41,7 +41,7 @@ def ms_calendar():
         return {"error": str(e)}, 400
 
 
-@main.route("/list_windows", methods=["GET"])
+@main.route("/record/list_windows", methods=["GET"])
 def list_windows():
     """Zwróć listę okien."""
     windows = gw.getAllTitles()
@@ -52,7 +52,7 @@ def list_windows():
 UPLOAD_FOLDER = os.path.join(os.getcwd(), 'recordings')
 ALLOWED_EXTENSIONS = {'webm', 'mp4', 'avi'}
 
-@main.route("/record_window", methods=["POST"])
+@main.route("/record/record_window", methods=["POST"])
 def record_window_route():
     setup_upload_folder()
     data = request.get_json()
@@ -67,7 +67,7 @@ def record_window_route():
     return jsonify({"message": f"Rozpoczęto nagrywanie okna: {window_title}"})
 
 
-@main.route("/stop_recording", methods=["POST"])
+@main.route("/record/stop_recording", methods=["POST"])
 def stop_recording_route():
     try:
         stop_recording()
