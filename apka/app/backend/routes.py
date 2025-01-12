@@ -13,6 +13,9 @@ main = Blueprint('main', __name__, template_folder="../frontend/templates", stat
 def index():
     return render_template("index.html")
 
+@main.route("/record")
+def record():
+    return render_template("record.html")
 
 @main.route('/events')
 def events():
@@ -75,6 +78,7 @@ def stop_recording_route():
 
 @main.route('/save', methods=['POST'])
 def save_recording_route():
+    setup_upload_folder()
     """Zapisz nagranie i przekonwertuj na MP4."""
     try:
         file = request.files['file']
